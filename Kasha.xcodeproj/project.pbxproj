@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF7807A11E96D501001FF71C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7807A01E96D501001FF71C /* APIError.swift */; };
 		FF7B4A611E96B4C7009DF270 /* KashaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B4A601E96B4C7009DF270 /* KashaTests.swift */; };
 		FF7B4A631E96B4C7009DF270 /* Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF7B4A4C1E96B25F009DF270 /* Kasha.framework */; };
-		FF7B4A6C1E96B5B6009DF270 /* Kasha.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B4A6B1E96B5B6009DF270 /* Kasha.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +23,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF7807A01E96D501001FF71C /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		FF7B4A4C1E96B25F009DF270 /* Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF7B4A501E96B25F009DF270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF7B4A5E1E96B4C7009DF270 /* KashaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KashaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF7B4A601E96B4C7009DF270 /* KashaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaTests.swift; sourceTree = "<group>"; };
 		FF7B4A621E96B4C7009DF270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF7B4A6B1E96B5B6009DF270 /* Kasha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kasha.swift; sourceTree = "<group>"; };
 		FF7B4A6D1E96B605009DF270 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		FF7B4A701E96BE59009DF270 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,7 +112,7 @@
 		FF7B4A691E96B4DA009DF270 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				FF7B4A6B1E96B5B6009DF270 /* Kasha.swift */,
+				FF7807A01E96D501001FF71C /* APIError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -239,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF7B4A6C1E96B5B6009DF270 /* Kasha.swift in Sources */,
+				FF7807A11E96D501001FF71C /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
