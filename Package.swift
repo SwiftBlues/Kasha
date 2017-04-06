@@ -21,5 +21,10 @@
 import PackageDescription
 
 let package = Package(
-	name: "Kasha"
+	name: "Kasha",
+	dependencies: [
+		.Package(
+			url: "https://github.com/utahiosmac/Marshal",
+			majorVersion: 1)
+	]
 )
