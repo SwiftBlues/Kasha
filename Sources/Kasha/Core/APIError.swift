@@ -23,7 +23,7 @@ import Marshal
 
 /// An object that provides additional information about problems encountered
 /// while performing an operation.
-public struct APIError: Error {
+public struct APIError: Error{
 
 	/// A unique identifier for this particular occurrence of the problem.
 	public let id: String?

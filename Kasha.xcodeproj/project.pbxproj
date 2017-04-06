@@ -148,6 +148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF7B4A541E96B25F009DF270 /* Build configuration list for PBXNativeTarget "Kasha" */;
 			buildPhases = (
+				FF7807A31E96D5B0001FF71C /* Lint Sources */,
 				FF7B4A471E96B25F009DF270 /* Sources */,
 				FF7B4A481E96B25F009DF270 /* Frameworks */,
 			);
@@ -164,6 +165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF7B4A661E96B4C7009DF270 /* Build configuration list for PBXNativeTarget "KashaTests" */;
 			buildPhases = (
+				FF7807A21E96D592001FF71C /* Lint Sources */,
 				FF7B4A5A1E96B4C7009DF270 /* Sources */,
 				FF7B4A5B1E96B4C7009DF270 /* Frameworks */,
 				FF78079E1E96D107001FF71C /* Copy Frameworks */,
@@ -231,6 +233,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "for path in $FRAMEWORK_SEARCH_PATHS; do\n    if [[ -d \"${path}/Marshal.framework\" ]] && [[ $path == *\"Carthage\"* ]]; then\n        export SCRIPT_INPUT_FILE_COUNT=1\n        export SCRIPT_INPUT_FILE_0=\"${path}/Marshal.framework\"\n        /usr/local/bin/carthage copy-frameworks\n        break\n    fi\ndone";
+		};
+		FF7807A21E96D592001FF71C /* Lint Sources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Sources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint; then swiftlint; fi";
+		};
+		FF7807A31E96D5B0001FF71C /* Lint Sources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Sources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint; then swiftlint; fi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
