@@ -1,5 +1,5 @@
 //
-//  KashaTests.swift
+//  Utils.swift
 //  Part of Kasha, a JSON API library for Swift.
 //
 //  Copyright (C) 2017 Alexander Tovstonozhenko
@@ -17,22 +17,17 @@
 //  limitations under the License.
 //
 
+// swiftlint:disable force_cast force_try
+
 import Marshal
 import XCTest
-@testable import Kasha
 
-final class KashaTests: XCTestCase {
+extension XCTestCase {
 
-	func testDocument() {
-		let json = fixture("document")
-		do {
-			let document = try MultipleResourcesDocument(object: json)
-			let article = try [Article](document: document).first
-			print(article as Any)
-		} catch {
-			print(error)
-			XCTFail(error.localizedDescription)
-		}
+	func fixture(_ name: String) -> JSONObject {
+		let path = Bundle(for: type(of: self)).url(forResource: name, withExtension: "json")!
+		let data = try! Data(contentsOf: path)
+		return try! JSONParser.JSONObjectWithData(data)
 	}
 
 }

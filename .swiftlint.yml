@@ -1,6 +1,7 @@
 disabled_rules:
-  - opening_brace
   - identifier_name
+  - opening_brace
+  - operator_whitespace
 
 included:
   - Sources

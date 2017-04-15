@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF08B37C1E9820A20092A9FA /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF08B37B1E9820A20092A9FA /* Errors.swift */; };
 		FF7807A11E96D501001FF71C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7807A01E96D501001FF71C /* APIError.swift */; };
+		FF7807A51E96D773001FF71C /* APIDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7807A41E96D773001FF71C /* APIDocument.swift */; };
+		FF7807A71E96D793001FF71C /* APIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7807A61E96D793001FF71C /* APIResource.swift */; };
 		FF7B4A611E96B4C7009DF270 /* KashaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B4A601E96B4C7009DF270 /* KashaTests.swift */; };
 		FF7B4A631E96B4C7009DF270 /* Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF7B4A4C1E96B25F009DF270 /* Kasha.framework */; };
+		FFAED2871EA22F07006E7680 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAED2861EA22F07006E7680 /* Utils.swift */; };
+		FFAED2891EA2303F006E7680 /* document.json in Resources */ = {isa = PBXBuildFile; fileRef = FFAED2851EA22E12006E7680 /* document.json */; };
+		FFAED28B1EA23147006E7680 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAED28A1EA23147006E7680 /* Models.swift */; };
+		FFAED2911EA2437E006E7680 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAED28F1EA2435B006E7680 /* Resource.swift */; };
+		FFAED2921EA24384006E7680 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAED28D1EA23EF2006E7680 /* Document.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF08B37B1E9820A20092A9FA /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		FF7807A01E96D501001FF71C /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		FF7807A41E96D773001FF71C /* APIDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDocument.swift; sourceTree = "<group>"; };
+		FF7807A61E96D793001FF71C /* APIResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResource.swift; sourceTree = "<group>"; };
 		FF7B4A4C1E96B25F009DF270 /* Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF7B4A501E96B25F009DF270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF7B4A5E1E96B4C7009DF270 /* KashaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KashaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +42,11 @@
 		FF7B4A621E96B4C7009DF270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF7B4A6D1E96B605009DF270 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		FF7B4A701E96BE59009DF270 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		FFAED2851EA22E12006E7680 /* document.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = document.json; sourceTree = "<group>"; };
+		FFAED2861EA22F07006E7680 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		FFAED28A1EA23147006E7680 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FFAED28D1EA23EF2006E7680 /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		FFAED28F1EA2435B006E7680 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +74,7 @@
 				FF7B4A6D1E96B605009DF270 /* Package.swift */,
 				FF7B4A581E96B4B7009DF270 /* Sources */,
 				FF7B4A591E96B4BD009DF270 /* Tests */,
+				FFAED2831EA22D92006E7680 /* Resources */,
 				FF7B4A4D1E96B25F009DF270 /* Products */,
 			);
 			indentWidth = 8;
@@ -78,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				FF7B4A691E96B4DA009DF270 /* Core */,
+				FFAED28C1EA23D5D006E7680 /* Interface */,
 				FF7B4A6A1E96B4DE009DF270 /* Supporting Files */,
 			);
 			path = Kasha;
@@ -112,7 +130,9 @@
 		FF7B4A691E96B4DA009DF270 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FF7807A41E96D773001FF71C /* APIDocument.swift */,
 				FF7807A01E96D501001FF71C /* APIError.swift */,
+				FF7807A61E96D793001FF71C /* APIResource.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -129,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				FF7B4A601E96B4C7009DF270 /* KashaTests.swift */,
+				FFAED28A1EA23147006E7680 /* Models.swift */,
+				FFAED2861EA22F07006E7680 /* Utils.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -139,6 +161,32 @@
 				FF7B4A621E96B4C7009DF270 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FFAED2831EA22D92006E7680 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FFAED2841EA22DC5006E7680 /* Fixtures */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FFAED2841EA22DC5006E7680 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				FFAED2851EA22E12006E7680 /* document.json */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		FFAED28C1EA23D5D006E7680 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				FFAED28D1EA23EF2006E7680 /* Document.swift */,
+				FF08B37B1E9820A20092A9FA /* Errors.swift */,
+				FFAED28F1EA2435B006E7680 /* Resource.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +216,7 @@
 				FF7807A21E96D592001FF71C /* Lint Sources */,
 				FF7B4A5A1E96B4C7009DF270 /* Sources */,
 				FF7B4A5B1E96B4C7009DF270 /* Frameworks */,
+				FFAED2881EA23037006E7680 /* Resources */,
 				FF78079E1E96D107001FF71C /* Copy Frameworks */,
 			);
 			buildRules = (
@@ -219,6 +268,17 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		FFAED2881EA23037006E7680 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFAED2891EA2303F006E7680 /* document.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
 		FF78079E1E96D107001FF71C /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -269,6 +329,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF7807A71E96D793001FF71C /* APIResource.swift in Sources */,
+				FF08B37C1E9820A20092A9FA /* Errors.swift in Sources */,
+				FFAED2921EA24384006E7680 /* Document.swift in Sources */,
+				FF7807A51E96D773001FF71C /* APIDocument.swift in Sources */,
+				FFAED2911EA2437E006E7680 /* Resource.swift in Sources */,
 				FF7807A11E96D501001FF71C /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAED28B1EA23147006E7680 /* Models.swift in Sources */,
 				FF7B4A611E96B4C7009DF270 /* KashaTests.swift in Sources */,
+				FFAED2871EA22F07006E7680 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

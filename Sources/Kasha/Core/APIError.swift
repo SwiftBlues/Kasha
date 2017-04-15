@@ -23,7 +23,7 @@ import Marshal
 
 /// An object that provides additional information about problems encountered
 /// while performing an operation.
-public struct APIError: Error{
+public struct APIError: Error, Unmarshaling {
 
 	/// A unique identifier for this particular occurrence of the problem.
 	public let id: String?
@@ -54,26 +54,6 @@ public struct APIError: Error{
 	/// A meta object containing non-standard meta-information about the error.
 	public let meta: JSONObject?
 
-	private init() {
-		fatalError()
-	}
-
-}
-
-extension APIError: LocalizedError { // MARK: LocalizedError
-
-	public var errorDescription: String? {
-		return title
-	}
-
-	public var failureReason: String? {
-		return detail
-	}
-
-}
-
-extension APIError: Unmarshaling { // MARK: Unmarshaling
-
 	/// Creates a `APIError` using a given JSON representation.
 	///
 	/// - Parameter object: JSON representation of an error object.
@@ -88,6 +68,27 @@ extension APIError: Unmarshaling { // MARK: Unmarshaling
 		pointer = try object.value(for: "source.pointer")
 		parameter = try object.value(for: "source.parameter")
 		meta = try object.value(for: "meta")
+	}
+
+}
+
+extension APIError {
+
+	/// Convenience wrapper for `meta`.
+	public var someMeta: JSONObject {
+		return meta ?? [:]
+	}
+
+}
+
+extension APIError: LocalizedError {
+
+	public var errorDescription: String? {
+		return title
+	}
+
+	public var failureReason: String? {
+		return detail
 	}
 
 }
