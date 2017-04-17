@@ -1,5 +1,5 @@
 //
-//  APIError.swift
+//  Errors.swift
 //  Part of Kasha, a JSON API library for Swift.
 //
 //  Copyright (C) 2017 Alexander Tovstonozhenko
@@ -89,6 +89,51 @@ extension APIError: LocalizedError {
 
 	public var failureReason: String? {
 		return detail
+	}
+
+}
+
+public enum SpecViolationError: Error {
+
+	/// Document doesn’t contain any of the `data`, `errors`, or `meta` top-level members.
+	case topLevelMemberMissing
+
+	/// Top-level members `data` and `errors` coexist in the same document.
+	case topLevelDataAndErrorsCoexist
+
+	/// Top-level `included` document is present while top-level `data` member is missing.
+	case topLevelIncludedPresentWhileDataMissing
+
+}
+
+extension SpecViolationError: LocalizedError {
+
+	public var errorDescription: String? {
+		switch self {
+		case .topLevelMemberMissing:
+			return "Document doesn’t contain any of the `data`, `errors`, or `meta` top-level members."
+		case .topLevelDataAndErrorsCoexist:
+			return "Top-level members `data` and `errors` coexist in the same document."
+		case .topLevelIncludedPresentWhileDataMissing:
+			return "Top-level `included` document is present while top-level `data` member is missing."
+		}
+	}
+
+}
+
+// MARK: -
+
+public enum SanityError: Error {
+	case resourceTypeMismatch(expected: String, actual: String)
+}
+
+extension SanityError: LocalizedError {
+
+	public var errorDescription: String? {
+		switch self {
+		default:
+			return nil
+		}
 	}
 
 }

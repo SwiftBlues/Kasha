@@ -18,45 +18,50 @@
 //
 
 import Kasha
+import Marshal
 
 struct Article: Resource {
 
 	static let type = "articles"
-
 	let id: String
 	let title: String
 	let author: Related<Author>?
 	let comments: [Related<Comment>]
 
-	init(resource: APIResource, included: [APIResource] = []) throws {
+	init(resource: APIResource, context: APIDocument? = nil) throws {
 		try Article.checkSanity(for: resource)
 
 		id = resource.id
 		title = try resource.attribute("title")
-		author = try resource.related("author", from: included)
-		comments = try resource.related("comments", from: included)
+		author = try resource.related("author", context: context)
+		comments = try resource.related("comments", context: context)
 	}
 
 }
 
-public struct Author: Resource {
+struct Author: Resource {
 
-	public static let type = "people"
-
-	public let id: String
+	static let type = "people"
+	let id: String
 	let firstName: String
 	let lastName: String
 	let twitter: String?
-	let articles: [Related<Article>]
 
-	public init(resource: APIResource, included: [APIResource] = []) throws {
+	init(resource: APIResource, context: APIDocument? = nil) throws {
 		try Author.checkSanity(for: resource)
 
 		id = resource.id
 		firstName = try resource.attribute("first-name")
 		lastName = try resource.attribute("last-name")
 		twitter = try resource.attribute("twitter")
-		articles = try resource.related("articles", from: included)
+	}
+
+	var attributes: JSONObject {
+		var attrs = JSONObject()
+		attrs["first-name"] = firstName
+		attrs["last-name"] = lastName
+		attrs["twitter"] = twitter
+		return attrs
 	}
 
 }
@@ -64,17 +69,27 @@ public struct Author: Resource {
 struct Comment: Resource {
 
 	static let type = "comments"
-
 	let id: String
 	let body: String
 	let author: Related<Author>?
 
-	init(resource: APIResource, included: [APIResource] = []) throws {
+	init(resource: APIResource, context: APIDocument? = nil) throws {
 		try Comment.checkSanity(for: resource)
 
 		id = resource.id
 		body = try resource.attribute("body")
-		author = try resource.related("author", from: included)
+		author = try resource.related("author", context: context)
+	}
+
+	var attributes: JSONObject {
+		var attrs = JSONObject()
+		attrs["body"] = body
+		return attrs
+	}
+
+	var relationships: JSONObject {
+		var rels = JSONObject()
+		return rels
 	}
 
 }

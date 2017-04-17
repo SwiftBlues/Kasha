@@ -1,5 +1,5 @@
 //
-//  APIResource.swift
+//  Resources.swift
 //  Part of Kasha, a JSON API library for Swift.
 //
 //  Copyright (C) 2017 Alexander Tovstonozhenko
@@ -161,28 +161,74 @@ extension APIResource {
 
 extension APIResource {
 
-	public func related<R: Resource>(_ key: KeyType, from resourcePool: [APIResource]) throws -> Related<R>? {
-		let relDoc = try SingleResourceDocument(object: someRelationships.value(for: key))
+	public func related<R: Resource>(_ key: KeyType, context: APIDocument?) throws -> Related<R>? {
+		let document = try APIDocument(object: someRelationships.value(for: key))
 
-		if let resource = resourcePool.first(where: { $0.type == R.type && $0.id == relDoc.data?.id }) {
-			return try Related(resource: R(resource: resource, included: resourcePool))
-		} else if let id = relDoc.data?.id {
-			return Related(id: id)
-		} else {
-			return nil
+		return try document.someData.first.map { try makeRelated(key, candidate: $0, context: context) }
+	}
+
+	public func related<R: Resource>(_ key: KeyType, context: APIDocument?) throws -> [Related<R>] {
+		let document = try APIDocument(object: someRelationships.value(for: key))
+
+		return try document.someData.map { try makeRelated(key, candidate: $0, context: context) }
+	}
+
+	fileprivate func makeRelated<R: Resource>(
+		_ key: KeyType,
+		candidate: APIResource,
+		context: APIDocument?) throws
+		-> Related<R>
+	{
+		try R.checkSanity(for: candidate)
+
+		return try Related(key, id: candidate.id, value: context?.someIncluded
+			.first { $0.type == R.type && $0.id == candidate.id }
+			.map { try R(resource: $0, context: context) })
+
+	}
+
+}
+
+public struct Related<R: Resource> {
+
+	public static var type: String {
+		return R.type
+	}
+
+	public let key: KeyType
+	public let id: String
+	public let value: R?
+
+	init(_ key: KeyType, id: String, value: R? = nil) {
+		self.key = key
+		self.id = id
+		self.value = value
+	}
+
+}
+
+public protocol Resource {
+	static var type: String { get }
+	var id: String { get }
+	init(resource: APIResource, context: APIDocument?) throws
+}
+
+extension Resource {
+
+	public static func checkSanity(for resource: APIResource) throws {
+		guard resource.type == type else {
+			throw SanityError.resourceTypeMismatch(expected: type, actual: resource.type)
 		}
 	}
 
-	public func related<R: Resource>(_ key: KeyType, from resourcePool: [APIResource]) throws -> [Related<R>] {
-		let relDoc = try MultipleResourcesDocument(object: someRelationships.value(for: key))
+	public static func make(context: APIDocument) throws -> Self? {
+		guard let resource = context.someData.first else { return nil }
 
-		return try relDoc.someData.map { apiResource in
-			if let resource = resourcePool.first(where: { $0.type == R.type && $0.id == apiResource.id }) {
-				return try Related(resource: R(resource: resource, included: resourcePool))
-			} else {
-				return Related(id: apiResource.id)
-			}
-		}
+		return try Self(resource: resource, context: context)
+	}
+
+	public static func make(context: APIDocument) throws -> [Self] {
+		return try context.someData.map { try Self(resource: $0, context: context) }
 	}
 
 }

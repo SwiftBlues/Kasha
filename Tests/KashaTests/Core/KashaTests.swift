@@ -26,8 +26,8 @@ final class KashaTests: XCTestCase {
 	func testDocument() {
 		let json = fixture("document")
 		do {
-			let document = try MultipleResourcesDocument(object: json)
-			let article = try [Article](document: document).first
+			let document = try APIDocument(object: json)
+			let article = try Article.make(context: document) as Article?
 			print(article as Any)
 		} catch {
 			print(error)

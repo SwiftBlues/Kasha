@@ -1,5 +1,5 @@
 //
-//  APIDocument.swift
+//  Documents.swift
 //  Part of Kasha, a JSON API library for Swift.
 //
 //  Copyright (C) 2017 Alexander Tovstonozhenko
@@ -19,41 +19,50 @@
 
 import Marshal
 
-public protocol APIDocument: Unmarshaling {
-
-	/// Either `APIResource` or `[APIResource]`.
-	associatedtype Resource
+public struct APIDocument: Unmarshaling {
 
 	/// The document’s primary data.
-	var data: Resource? { get }
+	public let data: [APIResource]?
 
 	/// Additional information about problems encountered while performing an operation.
-	var errors: [APIError]? { get }
+	public let errors: [APIError]?
 
 	/// Non-standard meta-information.
-	var meta: JSONObject? { get }
+	public let meta: JSONObject?
 
 	/// Information about the server’s JSON API implementation.
-	var jsonapi: JSONObject? { get }
+	public let jsonapi: JSONObject?
 
 	/// Links related to the primary data.
-	var links: JSONObject? { get }
+	public let links: JSONObject?
 
 	/// APIResources that are related to the primary data and/or each other.
-	var included: [APIResource]? { get }
+	public let included: [APIResource]?
 
-}
-
-extension APIDocument where Resource == [APIResource] {
-
-	/// Convenience wrapper for `data`.
-	public var someData: Resource {
-		return data ?? []
+	public init(object: MarshaledObject) throws {
+		if let resource = try? object.value(for: "data") as APIResource {
+			data = [resource]
+		} else if let resources = try? object.value(for: "data") as [APIResource] {
+			data = resources
+		} else {
+			data = nil
+		}
+		errors = try object.value(for: "errors")
+		meta = try object.value(for: "meta")
+		jsonapi = try object.value(for: "jsonapi")
+		links = try object.value(for: "links")
+		included = try object.value(for: "included")
+		try checkSpecConformance()
 	}
 
 }
 
 extension APIDocument {
+
+	/// Convenience wrapper for `data`.
+	public var someData: [APIResource] {
+		return data ?? []
+	}
 
 	/// Convenience wrapper for `errors`.
 	public var someErrors: [APIError] {
@@ -80,7 +89,7 @@ extension APIDocument {
 		return included ?? []
 	}
 
-	public func checkSpecConformance() throws {
+	func checkSpecConformance() throws {
 		guard !(data == nil && errors == nil && meta == nil) else {
 			throw SpecViolationError.topLevelMemberMissing
 		}
