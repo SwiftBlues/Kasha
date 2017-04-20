@@ -26,15 +26,14 @@ struct Article: Resource {
 	let id: String
 	let title: String
 	let author: Related<Author>?
-	let comments: [Related<Comment>]
+	let comments: [Related<Comment>]?
 
-	init(resource: APIResource, context: APIDocument? = nil) throws {
-		try Article.checkSanity(for: resource)
-
+	init(resource: APIResource, document: APIDocument?) throws {
+		try Article.checkSanity(of: resource)
 		id = resource.id
 		title = try resource.attribute("title")
-		author = try resource.related("author", context: context)
-		comments = try resource.related("comments", context: context)
+		author = try resource.related("author", in: document)
+		comments = try resource.related("comments", in: document)
 	}
 
 }
@@ -47,21 +46,12 @@ struct Author: Resource {
 	let lastName: String
 	let twitter: String?
 
-	init(resource: APIResource, context: APIDocument? = nil) throws {
-		try Author.checkSanity(for: resource)
-
+	init(resource: APIResource, document: APIDocument?) throws {
+		try Author.checkSanity(of: resource)
 		id = resource.id
 		firstName = try resource.attribute("first-name")
 		lastName = try resource.attribute("last-name")
 		twitter = try resource.attribute("twitter")
-	}
-
-	var attributes: JSONObject {
-		var attrs = JSONObject()
-		attrs["first-name"] = firstName
-		attrs["last-name"] = lastName
-		attrs["twitter"] = twitter
-		return attrs
 	}
 
 }
@@ -73,23 +63,11 @@ struct Comment: Resource {
 	let body: String
 	let author: Related<Author>?
 
-	init(resource: APIResource, context: APIDocument? = nil) throws {
-		try Comment.checkSanity(for: resource)
-
+	init(resource: APIResource, document: APIDocument?) throws {
+		try Comment.checkSanity(of: resource)
 		id = resource.id
 		body = try resource.attribute("body")
-		author = try resource.related("author", context: context)
-	}
-
-	var attributes: JSONObject {
-		var attrs = JSONObject()
-		attrs["body"] = body
-		return attrs
-	}
-
-	var relationships: JSONObject {
-		var rels = JSONObject()
-		return rels
+		author = try resource.related("author", in: document)
 	}
 
 }

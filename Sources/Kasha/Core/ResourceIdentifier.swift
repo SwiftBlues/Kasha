@@ -1,5 +1,5 @@
 //
-//  KashaTests.swift
+//  ResourceIdentifier.swift
 //  Part of Kasha, a JSON API library for Swift.
 //
 //  Copyright (C) 2017 Alexander Tovstonozhenko
@@ -18,20 +18,19 @@
 //
 
 import Marshal
-import XCTest
-@testable import Kasha
 
-final class KashaTests: XCTestCase {
+public struct ResourceIdentifier<R: Resource>: Resource {
 
-	func testDocument() {
-		let json = fixture("document")
-		do {
-			let document = try APIDocument(object: json)
-			let articles = try Article.from(document: document) as [Article]
-			print(articles.first?.comments as Any)
-		} catch {
-			XCTFail("\(error)")
-		}
+	public static var type: String { return R.type }
+	public let id: String
+	public let meta: JSONObject
+	public let maybeMeta: JSONObject?
+
+	public init(resource: APIResource, document: APIDocument?) throws {
+		try R.checkSanity(of: resource)
+		id = resource.id
+		maybeMeta = resource.maybeMeta
+		meta = maybeMeta ?? [:]
 	}
 
 }
