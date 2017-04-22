@@ -21,6 +21,8 @@ import Marshal
 import XCTest
 @testable import Kasha
 
+// swiftlint:disable force_try
+
 final class KashaTests: XCTestCase {
 
 	func testDocument() {
@@ -32,6 +34,15 @@ final class KashaTests: XCTestCase {
 		} catch {
 			XCTFail("\(error)")
 		}
+	}
+
+	func testEncoding() {
+		let author = Author(firstName: "John", lastName: "Doe", twitter: "johndoe")
+		let comment = Comment(body: "Ayy lmao", author: author)
+		let encoded = try! JSONSerialization.data(withJSONObject: comment.encoded())
+		let decoded = try! JSONSerialization.jsonObject(with: encoded)
+		print(decoded)
+		print(comment.encoded())
 	}
 
 }

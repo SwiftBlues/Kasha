@@ -97,35 +97,19 @@ extension APIResource {
 
 	// MARK: - Relationship extractors
 
-	public func related<R>(_ key: KeyType, in document: APIDocument?) throws -> Related<R> where R: Resource {
-		let data = try APIDocument(object: relationships.value(for: key)).data
-
-		guard let resource = data.first else {
-			throw SanityError.other
-		}
-
-		return try related(to: resource, in: document)
+	public func asRelated<R>(in document: APIDocument?) throws -> Related<R> where R: Resource {
+		let resource = document?.included.first(where: { $0 == self }) ?? self
+		return try Related(resource: resource, document: document)
 	}
 
 	public func related<R>(_ key: KeyType, in document: APIDocument?) throws -> Related<R>? where R: Resource {
 		let data = try APIDocument(object: relationships.value(for: key)).data
-
-		return try data.first.map { try related(to: $0, in: document) }
+		return try data.first.map { try $0.asRelated(in: document) }
 	}
 
 	public func related<R>(_ key: KeyType, in document: APIDocument?) throws -> [Related<R>] where R: Resource {
 		let data = try APIDocument(object: relationships.value(for: key)).data
-
-		return try data.map { try related(to: $0, in: document) }
-	}
-
-	public func related<R>(to resource: APIResource, in document: APIDocument?) throws -> Related<R>
-		where R: Resource
-	{
-		try R.checkSanity(of: resource)
-
-		let related = document?.included.first(where: { $0 == resource }) ?? resource
-		return try Related(resource: related, document: document)
+		return try data.map { try $0.asRelated(in: document) }
 	}
 
 }

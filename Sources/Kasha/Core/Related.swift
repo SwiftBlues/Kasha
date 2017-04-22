@@ -17,6 +17,8 @@
 //  limitations under the License.
 //
 
+import Marshal
+
 public enum Related<R: Resource>: Resource {
 
 	case resource(R)
@@ -38,6 +40,10 @@ public enum Related<R: Resource>: Resource {
 		case .resource(let resource): return resource
 		case .identifier: return nil
 		}
+	}
+
+	public init(_ resource: R) {
+		self = .resource(resource)
 	}
 
 	public init(resource: APIResource, document: APIDocument?) throws {

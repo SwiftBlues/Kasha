@@ -17,9 +17,15 @@
 //  limitations under the License.
 //
 
+import Marshal
+
 public protocol Resource {
 	static var type: String { get }
 	var id: String { get }
+	var attributes: JSONObject? { get }
+	var relationships: JSONObject? { get }
+	var links: JSONObject? { get }
+	var meta: JSONObject? { get }
 	init(resource: APIResource, document: APIDocument?) throws
 }
 
@@ -39,6 +45,36 @@ extension Resource {
 
 	public static func from(document: APIDocument) throws -> [Self] {
 		return try document.data.map { try Self(resource: $0, document: document) }
+	}
+
+	public var attributes: JSONObject? {
+		return nil
+	}
+
+	public var relationships: JSONObject? {
+		return nil
+	}
+
+	public var links: JSONObject? {
+		return nil
+	}
+
+	public var meta: JSONObject? {
+		return nil
+	}
+
+	public func encoded(asData: Bool = true) -> JSONObject {
+		var json = JSONObject()
+		json["type"] = Self.type
+		json["id"] = id
+		json["attributes"] = attributes
+		json["relationships"] = relationships
+		json["links"] = links
+		json["meta"] = meta
+		if asData {
+			json = ["data": json]
+		}
+		return json
 	}
 
 }

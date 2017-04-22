@@ -46,6 +46,13 @@ struct Author: Resource {
 	let lastName: String
 	let twitter: String?
 
+	init(firstName: String, lastName: String, twitter: String?) {
+		id = ""
+		self.firstName = firstName
+		self.lastName = lastName
+		self.twitter = twitter
+	}
+
 	init(resource: APIResource, document: APIDocument?) throws {
 		try Author.checkSanity(of: resource)
 		id = resource.id
@@ -62,6 +69,20 @@ struct Comment: Resource {
 	let id: String
 	let body: String
 	let author: Related<Author>?
+
+	var attributes: JSONObject? {
+		return ["body": body]
+	}
+
+	var relationships: JSONObject? {
+		return ["author": author?.encoded() as Any]
+	}
+
+	init(body: String, author: Author) {
+		id = ""
+		self.body = body
+		self.author = Related(author)
+	}
 
 	init(resource: APIResource, document: APIDocument?) throws {
 		try Comment.checkSanity(of: resource)
